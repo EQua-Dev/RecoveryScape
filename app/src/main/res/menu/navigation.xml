@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_explore"
+        android:icon="@drawable/ic_baseline_explore_24"
+        android:title="Explore" />
+    <item
+        android:id="@+id/navigation_request"
+        android:icon="@drawable/ic_baseline_person_add_24"
+        android:title="Friend Request" />
+    <item
+        android:id="@+id/navigation_exit"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:title="Exit" />
+</menu>
