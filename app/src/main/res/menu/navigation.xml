@@ -9,8 +9,4 @@
         android:id="@+id/navigation_request"
         android:icon="@drawable/ic_baseline_person_add_24"
         android:title="Friend Request" />
-    <item
-        android:id="@+id/navigation_exit"
-        android:icon="@drawable/ic_baseline_exit_to_app_24"
-        android:title="Exit" />
 </menu>

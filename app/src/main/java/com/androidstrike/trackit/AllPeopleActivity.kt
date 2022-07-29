@@ -269,10 +269,10 @@ class AllPeopleActivity : AppCompatActivity(), IFirebaseLoadDone {
 
                         val request = Request()
                         val dataSend = HashMap<String, String>()
-                        dataSend[Common.FROM_UID] = Common.loggedUser.uid!! //uid
-                        dataSend[Common.FROM_EMAIL] = Common.loggedUser.email!! //my email
-                        dataSend[Common.TO_UID] = Common.loggedUser.email!! //friend email
-                        dataSend[Common.TO_EMAIL] = Common.loggedUser.email!! //friend email
+                        dataSend[Common.FROM_UID] = Common.loggedUser!!.uid!! //uid
+                        dataSend[Common.FROM_EMAIL] = Common.loggedUser!!.email!! //my email
+                        dataSend[Common.TO_UID] = model.uid!! //friend uid
+                        dataSend[Common.TO_EMAIL] = model.email!! //friend email
 
                         //set request
                         request.to = snapshot.child(model.uid!!).getValue(String::class.java)!!

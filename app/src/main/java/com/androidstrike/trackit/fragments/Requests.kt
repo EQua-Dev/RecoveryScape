@@ -101,7 +101,7 @@ class Requests : Fragment(), IFirebaseLoadDone {
     private fun loadSearchData() {// function to load searched individual data from cloud (firebase)
         val lstUserEmail = ArrayList<String>()
         val userList = FirebaseDatabase.getInstance().getReference(Common.USER_INFORMATION)
-            .child(Common.loggedUser.uid!!)
+            .child(Common.loggedUser!!.uid!!)
             .child(Common.FRIEND_REQUEST)
 
         userList.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -124,7 +124,7 @@ class Requests : Fragment(), IFirebaseLoadDone {
     private fun startSearch (search_string: String){
 
         val query = FirebaseDatabase.getInstance().getReference(Common.USER_INFORMATION)
-            .child(Common.loggedUser.uid!!)
+            .child(Common.loggedUser!!.uid!!)
             .child(Common.FRIEND_REQUEST)
             .orderByChild("email")
 
@@ -172,7 +172,7 @@ class Requests : Fragment(), IFirebaseLoadDone {
 
     private fun loadFriendRequestList() {
         val query = FirebaseDatabase.getInstance().getReference(Common.USER_INFORMATION)
-            .child(Common.loggedUser.uid!!)
+            .child(Common.loggedUser!!.uid!!)
             .child(Common.FRIEND_REQUEST)
 
         val options = FirebaseRecyclerOptions.Builder<User>()
@@ -215,13 +215,13 @@ class Requests : Fragment(), IFirebaseLoadDone {
             .child(model.uid!!)
             .child(Common.ACCEPT_LIST)
 
-        acceptList.child(Common.loggedUser.uid!!).setValue(Common.loggedUser)
+        acceptList.child(Common.loggedUser!!.uid!!).setValue(Common.loggedUser)
     }
 
     private fun addToAcceptList(model: User) {
          val acceptList = FirebaseDatabase.getInstance()
              .getReference(Common.USER_INFORMATION)
-             .child(Common.loggedUser.uid!!)
+             .child(Common.loggedUser!!.uid!!)
              .child(Common.ACCEPT_LIST)
 
         acceptList.child(model.uid!!).setValue(model)
@@ -230,7 +230,7 @@ class Requests : Fragment(), IFirebaseLoadDone {
     private fun deleteFriendRequest(model: User, isShowMessage: Boolean) {
         val friendRequest = FirebaseDatabase.getInstance()
             .getReference(Common.USER_INFORMATION)
-            .child(Common.loggedUser.uid!!)
+            .child(Common.loggedUser!!.uid!!)
             .child(Common.FRIEND_REQUEST)
 
         friendRequest.child(model.uid!!).removeValue()

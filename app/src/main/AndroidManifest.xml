@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.androidstrike.trackit">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -11,14 +12,41 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AllPeopleActivity"></activity>
+
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC_gGHbGrjj7vMEZ_w9tWGJDjRb3x1bggU" />
+
+        <activity
+            android:name=".TrackingMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_tracking_maps" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AllPeopleActivity" />
         <activity
             android:name=".Landing"
             android:label="@string/title_activity_landing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/BackgroundTheme">
+            android:theme="@style/BackgroundTheme"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,12 +54,15 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".services.MyFirebaseMessagingService">
+        <service android:name=".services.MyFirebaseMessagingService"
+            android:exported="false"
+            >
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <receiver android:name=".services.MyLocationReceiver"/>
 
     </application>
 

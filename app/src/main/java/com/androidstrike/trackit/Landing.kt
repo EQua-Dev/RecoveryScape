@@ -42,13 +42,13 @@ class Landing : AppCompatActivity() {
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_exit ->{
-                val fragment = Exit()
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.container,fragment,fragment.javaClass.simpleName)
-                    .commit()
-                return@OnNavigationItemSelectedListener true
-            }
+//            R.id.navigation_exit ->{
+//                val fragment = Exit()
+//                supportFragmentManager.beginTransaction()
+//                    .replace(R.id.container,fragment,fragment.javaClass.simpleName)
+//                    .commit()
+//                return@OnNavigationItemSelectedListener true
+//            }
         }
         false
     }

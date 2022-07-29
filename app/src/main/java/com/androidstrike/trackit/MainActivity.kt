@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                             if (!snapshot.child(firebaseUser!!.uid).exists()){
                                 Common.loggedUser = User(firebaseUser.uid,firebaseUser.email)
                                 //Add user to database
-                                user_information.child(Common.loggedUser.uid!!)
+                                user_information.child(Common.loggedUser!!.uid!!)
                                     .setValue(Common.loggedUser)
                             }
                         }else{
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         //Save UID to storage to update location from killed mode
-                        Paper.book().write(Common.USER_UID_SAVE_KEY,Common.loggedUser.uid)
+                        Paper.book().write(Common.USER_UID_SAVE_KEY,Common.loggedUser!!.uid)
                         updateToken(firebaseUser)
                         setupUI()
                     }
