@@ -128,7 +128,8 @@ class FacilityRequestsScreen : Fragment() {
         val documentRef = Common.appointmentsCollectionRef.document(model.dateBooked)
 
         val updates = hashMapOf<String, Any>(
-            "status" to "rejected"
+            "status" to "rejected",
+            "dateResponded" to System.currentTimeMillis().toString()
         )
 
         documentRef.update(updates)
@@ -148,7 +149,8 @@ class FacilityRequestsScreen : Fragment() {
         val documentRef = Common.appointmentsCollectionRef.document(model.dateBooked)
 
         val updates = hashMapOf<String, Any>(
-            "status" to "accepted"
+            "status" to "accepted",
+            "dateResponded" to System.currentTimeMillis().toString()
         )
 
         documentRef.update(updates)
@@ -163,7 +165,6 @@ class FacilityRequestsScreen : Fragment() {
             }
 
     }
-
     private fun getClientDetails(clientId: String) = CoroutineScope(Dispatchers.IO).launch {
         Common.clientCollectionRef
             .get()

@@ -8,5 +8,6 @@ data class BookService(
     val dateBooked: String = "",
     val clientId: String = "",
     val facilityId: String = "",
-    val status: String = ""
+    val status: String = "",
+    val dateResponded: String = "",
 )

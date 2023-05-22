@@ -28,8 +28,9 @@ class ForgotPassword : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        facilityEmail = binding.forgotPasswordEmail.text.toString()
         binding.accountForgotPasswordBtnResetPassword.setOnClickListener {
+            facilityEmail = binding.forgotPasswordEmail.text.toString()
+
             FirebaseAuth.getInstance().sendPasswordResetEmail(facilityEmail)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

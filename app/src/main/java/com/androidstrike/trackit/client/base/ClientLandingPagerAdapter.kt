@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.androidstrike.trackit.client.landing.ClientNotification
+import com.androidstrike.trackit.client.clientnotification.ClientNotification
 import com.androidstrike.trackit.client.landing.DigitalWallet
 import com.androidstrike.trackit.client.landing.FeedbackRating
 import com.androidstrike.trackit.client.landing.InvoicePayment

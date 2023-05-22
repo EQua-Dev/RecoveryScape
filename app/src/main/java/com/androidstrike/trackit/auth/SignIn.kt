@@ -67,10 +67,11 @@ class SignIn : Fragment() {
                 findNavController().navigate(navToFacilitySignUp)
             }
 
-            binding.accountLogInForgotPasswordPrompt.setOnClickListener {
-                val navToForgotPassword = SignInDirections.actionSignInToForgotPassword()
-                findNavController().navigate(navToForgotPassword)
-            }
+
+        }
+        binding.accountLogInForgotPasswordPrompt.setOnClickListener {
+            val navToForgotPassword = SignInDirections.actionSignInToForgotPassword()
+            findNavController().navigate(navToForgotPassword)
         }
 
         binding.signInPassword.addTextChangedListener {
