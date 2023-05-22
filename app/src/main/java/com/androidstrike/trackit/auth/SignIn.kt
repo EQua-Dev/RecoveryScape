@@ -2,10 +2,12 @@ package com.androidstrike.trackit.auth
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,6 +17,7 @@ import com.androidstrike.trackit.utils.Common
 import com.androidstrike.trackit.utils.enable
 import com.androidstrike.trackit.utils.showProgressDialog
 import com.androidstrike.trackit.utils.toast
+import com.androidstrike.trackit.utils.visible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -50,6 +53,10 @@ class SignIn : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.accountLogInBtnLogin.enable(false)
         role = args.role
+
+        if (role == "facility"){
+            binding.accountLogInCreateAccount.visible(false)
+        }
         binding.accountLogInCreateAccount.setOnClickListener {
             if (role == "client"){
                 val navToClientSignUp = SignInDirections.actionSignInToClientSignUp()
@@ -73,7 +80,15 @@ class SignIn : Fragment() {
         }
 
         binding.accountLogInBtnLogin.setOnClickListener {
-            signIn(email, password)
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.textInputLayoutSignInEmail.error =
+                    "Enter valid email" // Display an error message
+            } else {
+                binding.textInputLayoutSignInEmail.error = null // Clear any previous error
+                signIn(email, password)
+
+            }
+
         }
     }
 
@@ -97,7 +112,7 @@ class SignIn : Fragment() {
                                 hideProgress()
 
                                 if (role == "client"){
-                                    val navToHome = SignInDirections.actionSignInToMapsFragment()
+                                    val navToHome = SignInDirections.actionSignInToClientBaseScreen()
                                     findNavController().navigate(navToHome)
                                 }else{
                                     val navToFacilityHome = SignInDirections.actionSignInToFacilityBaseScreen()

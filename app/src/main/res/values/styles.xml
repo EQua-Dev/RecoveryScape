@@ -20,6 +20,10 @@
         <item name="itemTextColor">@color/black</item>
     </style>
 
+    <style name="TabTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">12sp</item>
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

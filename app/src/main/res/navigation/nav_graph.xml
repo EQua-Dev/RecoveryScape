@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_signIn_to_facilityBaseScreen"
             app:destination="@id/facilityBaseScreen" />
+        <action
+            android:id="@+id/action_signIn_to_clientBaseScreen"
+            app:destination="@id/clientBaseScreen" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -75,4 +78,9 @@
             android:id="@+id/action_facilityBaseScreen_to_signIn"
             app:destination="@id/signIn" />
     </fragment>
+    <fragment
+        android:id="@+id/clientBaseScreen"
+        android:name="com.androidstrike.trackit.client.base.ClientBaseScreen"
+        android:label="fragment_client_base_screen"
+        tools:layout="@layout/fragment_client_base_screen" />
 </navigation>

@@ -25,6 +25,7 @@ import com.androidstrike.trackit.utils.toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -79,19 +80,11 @@ class ClientSignUp : Fragment() {
         geocoder = Geocoder(requireContext(), Locale.getDefault())
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-
-        binding.signUpPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                val input = p0.toString()
-                if (isPasswordValid(input)) {
+        binding.signUpPassword.setOnFocusChangeListener { v, hasFocus ->
+            val passwordLayout = v as TextInputEditText
+            val passwordText = passwordLayout.text.toString()
+            if (!hasFocus) {
+                if (isPasswordValid(passwordText)) {
                     binding.textInputLayoutSignUpPassword.error = null // Clear any previous error
                     passwordOkay = true
                 } else {
@@ -99,42 +92,27 @@ class ClientSignUp : Fragment() {
                         "Password must contain at least one digit, uppercase, lowercase, special character and 8 characters" // Display an error message
                 }
             }
-
-        })
-        binding.signUpConfirmPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
-            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                val input = p0.toString()
-                if (input == binding.signUpPassword.text.toString().trim()) {
-                    binding.textInputLayoutSignUpConfirmPassword.error =
-                        null // Clear any previous error
+        binding.signUpConfirmPassword.setOnFocusChangeListener { v, hasFocus ->
+            val confirmPasswordLayout = v as TextInputEditText
+            val confirmPasswordText = confirmPasswordLayout.text.toString()
+            if (!hasFocus) {
+                if (isPasswordValid(confirmPasswordText)) {
+                    binding.textInputLayoutSignUpConfirmPassword.error = null // Clear any previous error
                     confirmPasswordOkay = true
                 } else {
                     binding.textInputLayoutSignUpConfirmPassword.error =
-                        "Does not match password" // Display an error message
+                        "Password must contain at least one digit, uppercase, lowercase, special character and 8 characters" // Display an error message
                 }
             }
-
-        })
-        binding.signUpEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
-            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                val input = p0.toString()
-                if (Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
+        binding.signUpEmail.setOnFocusChangeListener { v, hasFocus ->
+            val emailLayout = v as TextInputEditText
+            val emailText = emailLayout.text.toString()
+            if (!hasFocus) {
+                if (Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
                     binding.textInputLayoutSignUpEmail.error = null // Clear any previous error
                     emailOkay = true
                 } else {
@@ -142,8 +120,69 @@ class ClientSignUp : Fragment() {
                         "Enter valid email" // Display an error message
                 }
             }
+            }
 
-        })
+
+//        binding.signUpPassword.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//                val input = p0.toString()
+//                if (isPasswordValid(input)) {
+//
+//                }
+//            }
+//
+//        })
+//        binding.signUpConfirmPassword.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//                val input = p0.toString()
+//                if (input == binding.signUpPassword.text.toString().trim()) {
+//                    binding.textInputLayoutSignUpConfirmPassword.error =
+//                        null // Clear any previous error
+//                    confirmPasswordOkay = true
+//                } else {
+//                    binding.textInputLayoutSignUpConfirmPassword.error =
+//                        "Does not match password" // Display an error message
+//                }
+//            }
+//
+//        })
+//        binding.signUpEmail.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//                val input = p0.toString()
+//                if (Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
+//                    binding.textInputLayoutSignUpEmail.error = null // Clear any previous error
+//                    emailOkay = true
+//                } else {
+//                    binding.textInputLayoutSignUpEmail.error =
+//                        "Enter valid email" // Display an error message
+//                }
+//            }
+//
+//        })
 
         binding.signUpAddressSelectMyLocation.setOnClickListener {
             getCurrentLocation()
