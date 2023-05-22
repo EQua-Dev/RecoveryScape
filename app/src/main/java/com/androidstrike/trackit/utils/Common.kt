@@ -3,11 +3,24 @@ package com.androidstrike.trackit.utils
 import com.androidstrike.trackit.model.User
 import com.androidstrike.trackit.remote.IFCMService
 import com.androidstrike.trackit.remote.RetrofitClient
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Common {
+
+
+    lateinit var auth: FirebaseAuth
+
+    //lateinit var mAuth: FirebaseAuth// = FirebaseAuth.getInstance()
+//    var mAuth = FirebaseAuth.getInstance()
+    val clientCollectionRef = Firebase.firestore.collection("Clients")
+    val facilityCollectionRef = Firebase.firestore.collection("Facilities")
+    val appointmentsCollectionRef = Firebase.firestore.collection("Appointments")
+
     fun convertTimeStampToDate(time: Long): Date {
         return Date(Timestamp(time).time)
     }

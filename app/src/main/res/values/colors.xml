@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="custom_client_accent_color">#03DAC5</color>
+    <color name="custom_facility_accent_color">#EF665C</color>
+    <color name="black">#000000</color>
+    <color name="grey">#f0f0f0</color>
 </resources>

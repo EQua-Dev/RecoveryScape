@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/facility_nav_graph"
+    app:startDestination="@id/facilityRequestsScreen">
+
+    <fragment
+        android:id="@+id/facilityRequestsScreen"
+        android:name="com.androidstrike.trackit.facility.requests.FacilityRequestsScreen"
+        android:label="fragment_facility_requests_screen"
+        tools:layout="@layout/fragment_facility_requests_screen" />
+</navigation>

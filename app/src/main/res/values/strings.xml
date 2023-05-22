@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trackit</string>
+    <string name="app_name">Recovery Scape</string>
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,6 +8,24 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string name="sign_in_subtitle">Enter details to sign in</string>
+    <string name="account_btn_login">Sign In</string>
+    <string name="account_log_in_forgot_password_prompt">Forgot Password</string>
+    <string name="sign_in_email">Enter Your Registered Email</string>
+    <string name="account_not_logged_in_create_account">No account yet? Register here</string>
+    <string name="sign_in_password">Enter Your Password</string>
+    <string name="sign_up_title">Sign Up</string>
+    <string name="sign_up_subtitle">Enter details to sign up</string>
+    <string name="sign_up_email">Enter Your Email</string>
+    <string name="sign_up_first_name">Enter Your First Name</string>
+    <string name="sign_up_last_name">Enter Your Last Name</string>
+    <string name="sign_up_password">Enter Your Desired Password</string>
+    <string name="sign_up_confirm_password">Re-enter Your Desired Password</string>
+    <string name="sign_up_phone_number">Enter Your Contact Phone Number</string>
+    <string name="sign_up_license_number">Enter Your License Number</string>
+    <string name="sign_up_login_prompt">Have an account? Login Here</string>
+    <string name="account_btn_sign_up">Register</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -15,4 +33,39 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_tracking_maps">TrackingMapsActivity</string>
+    <string name="landing_button_client_role">Client With Addiction Problem</string>
+    <string name="sign_in_title">Sign In</string>
+    <string name="forgot_password_title">Forgot Password\n</string>
+    <string name="forgot_password_subtitle">Enter Registered Email to Reset Passsword</string>
+    <string name="account_forgot_password_log_in_prompt">Remembered Password</string>
+    <string name="account_btn_reset_password">Reset Password</string>
+    <string name="sign_up_facility_name">Enter Facility Name</string>
+    <string name="sign_up_facility_physical_address">Enter Facilty Physical Address</string>
+    <string name="sign_up_facility_email">Enter Facility Email Address</string>
+    <string name="sign_up_facility_phone_number">Enter Facility Phone Number</string>
+    <string name="landing_button_facility_role">Rehabilitation Facility</string>
+    <string name="sign_up_address">Enter Your Address</string>
+    <string name="my_address">Here</string>
+    <string name="book_rehab">Book Appointment</string>
+    <string name="book_appointment_title">Book Appointment</string>
+    <string name="book_appointment_service">Select Service</string>
+    <string name="book_appointment_date">Select Date</string>
+    <string name="book_appointment_time">Select Appointment Time</string>
+    <string name="book_appointment_description">Request Text</string>
+    <string name="confirm_appointment_book">Confirm Book</string>
+    <string name="facility_navigation_profile">Profile</string>
+    <string name="facility_navigation_customer_requests">Customer Requests</string>
+    <string name="facility_navigation_feedback"><![CDATA[Ratings & Feedback]]></string>
+    <string name="facility_navigation_invoice"><![CDATA[Notification & Invoice]]></string>
+    <string name="user_request_title">User Request</string>
+    <string name="btn_accept_customer_request">Accept</string>
+    <string name="btn_reject_customer_request">Reject</string>
+    <string name="profile_title">Facility Profile</string>
+    <string name="profile_name">Facility Name</string>
+    <string name="profile_email">Facility Email</string>
+    <string name="profile_address">Facility Address</string>
+    <string name="profile_phone">Facility Phone Number</string>
+    <string name="profile_date_joined">Date Joined</string>
+    <string name="facility_edit_profile">Edit Profile</string>
+    <string name="profile_services">Services</string>
 </resources>
