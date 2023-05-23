@@ -72,4 +72,29 @@
     <string name="invoice_placeholder">View Invoices / Provide Payment</string>
     <string name="wallet_placeholder">Digital Wallet</string>
     <string name="notification_placeholder">View Notification</string>
+    <string name="facility_add_service_title">Add Service to Facility Profile</string>
+    <string name="facility_add_service_category">Category</string>
+    <string name="facility_add_service_description">Service Description</string>
+    <string name="facility_add_service_price">Service Price ($)</string>
+    <string name="facility_add_service_discounted_price">Discounted Price (%) (leave empty if nil)</string>
+    <string name="add_service_available_places">Service Available Places</string>
+    <string name="facility_add_service_start_end_date">Start-End Date (if applicable)</string>
+    <string name="facility_add_service_schedule">Service Schedule (if applicable)</string>
+    <string name="facility_add_service_submit_button">Submit</string>
+    <string name="facility_add_service_next_service_button">Next Service</string>
+
+    <string-array name="service_available_places_option">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="service_categories">
+        <item>Inpatient Treatment</item>
+        <item>Outpatient Treatment</item>
+        <item>Detoxification Services</item>
+        <item>Counselling Services</item>
+        <item>AA 12-step Program</item>
+        <item>Cognitive Behavioural Therapy (CBT)</item>
+        <item>Spiritual/Religious Services</item>
+    </string-array>
 </resources>

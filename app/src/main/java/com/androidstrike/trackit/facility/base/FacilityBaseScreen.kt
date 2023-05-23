@@ -38,6 +38,7 @@ class FacilityBaseScreen : Fragment() {
         with(binding){
             //set the title to be displayed on each tab
             facilityBaseTabTitle.addTab(facilityBaseTabTitle.newTab().setText("Profile"))
+            facilityBaseTabTitle.addTab(facilityBaseTabTitle.newTab().setText("Add Service"))
             facilityBaseTabTitle.addTab(facilityBaseTabTitle.newTab().setText("Customer Requests"))
             facilityBaseTabTitle.addTab(facilityBaseTabTitle.newTab().setText("Invoice & Notification"))
             facilityBaseTabTitle.addTab(facilityBaseTabTitle.newTab().setText("Rating & Feedback"))

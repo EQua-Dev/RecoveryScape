@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".facility.facilityservice.FacilityAddService">
+
+
+        <TextView
+            android:id="@+id/facility_add_service_category_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:layout_margin="@dimen/padding_midi"
+            android:text="@string/facility_add_service_title"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_xl" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_facility_add_service_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/facility_add_service_category_title"
+            android:layout_above="@id/facility_add_service_submit_button"
+            android:layout_margin="@dimen/padding_mini"
+            android:padding="@dimen/padding_mini"
+            app:cardElevation="@dimen/padding_mini">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_midi"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_facility_add_service_category"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/padding_mini"
+                    android:padding="@dimen/padding_mini"
+                    android:textColorHint="@color/custom_facility_accent_color">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/facility_add_service_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/padding_mini"
+                        android:drawablePadding="@dimen/padding_midi"
+                        android:inputType="none"
+                        android:hint="@string/facility_add_service_category"
+                        android:padding="@dimen/padding_maxi" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_facility_add_service_description"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_mini"
+                    android:layout_marginEnd="@dimen/padding_mini"
+                    android:hint="@string/facility_add_service_description"
+                    android:padding="@dimen/padding_mini"
+                    android:textColorHint="@color/custom_facility_accent_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/facility_add_service_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/facility_add_service_description"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:labelFor="@id/facility_add_service_description" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_facility_add_service_price"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_mini"
+                    android:layout_marginEnd="@dimen/padding_mini"
+                    android:hint="@string/facility_add_service_price"
+                    android:padding="@dimen/padding_mini"
+                    android:textColorHint="@color/custom_facility_accent_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/facility_add_service_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/facility_add_service_price"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:labelFor="@id/facility_add_service_price" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_facility_add_service_discounted_price"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_mini"
+                    android:layout_marginEnd="@dimen/padding_mini"
+                    android:hint="@string/facility_add_service_discounted_price"
+                    android:padding="@dimen/padding_mini"
+                    android:textColorHint="@color/custom_facility_accent_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/facility_add_service_discounted_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/facility_add_service_discounted_price"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:labelFor="@id/facility_add_service_discounted_price" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_facility_add_service_available_places"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/padding_mini"
+                    android:padding="@dimen/padding_mini"
+                    android:textColorHint="@color/custom_facility_accent_color">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/facility_add_service_available_places"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/padding_mini"
+                        android:drawablePadding="@dimen/padding_midi"
+                        android:inputType="none"
+                        android:hint="@string/add_service_available_places"
+                        android:padding="@dimen/padding_maxi" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_facility_add_service_start_end_date"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_mini"
+                    android:layout_marginEnd="@dimen/padding_mini"
+                    android:hint="@string/facility_add_service_start_end_date"
+                    android:padding="@dimen/padding_mini"
+                    android:textColorHint="@color/custom_facility_accent_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/facility_add_service_start_end_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/facility_add_service_start_end_date"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:labelFor="@id/facility_add_service_start_end_date" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_facility_add_service_schedule"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_mini"
+                    android:layout_marginEnd="@dimen/padding_mini"
+                    android:hint="@string/facility_add_service_schedule"
+                    android:padding="@dimen/padding_mini"
+                    android:textColorHint="@color/custom_facility_accent_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/facility_add_service_schedule"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/facility_add_service_schedule"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:labelFor="@id/facility_add_service_schedule" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+            </ScrollView>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/facility_add_service_submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/facility_add_service_next_service_button"
+            android:layout_marginStart="@dimen/padding_mini"
+            android:layout_marginTop="@dimen/padding_mini"
+            android:layout_marginEnd="@dimen/padding_mini"
+            android:layout_marginBottom="@dimen/padding_mini"
+            android:backgroundTint="@color/custom_facility_accent_color"
+            android:padding="@dimen/padding_mini"
+            android:text="@string/facility_add_service_submit_button" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/facility_add_service_next_service_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_mini"
+            android:layout_marginTop="@dimen/padding_mini"
+            android:layout_marginEnd="@dimen/padding_mini"
+            android:layout_marginBottom="@dimen/padding_maxi"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/custom_facility_accent_color"
+            android:padding="@dimen/padding_mini"
+            android:text="@string/facility_add_service_next_service_button" />
+
+</RelativeLayout>

@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.androidstrike.trackit.client.landing.FeedbackRating
 import com.androidstrike.trackit.facility.facilitynotification.FacilityNotification
+import com.androidstrike.trackit.facility.facilityservice.FacilityAddService
 import com.androidstrike.trackit.facility.profile.FacilityProfile
 import com.androidstrike.trackit.facility.requests.FacilityRequestsScreen
 
@@ -35,12 +36,15 @@ class FacilityLandingPagerAdapter (var context: FragmentActivity?,
                 FacilityProfile()
             }
             1 -> {
-                FacilityRequestsScreen()
+                FacilityAddService()
             }
             2 -> {
-                FacilityNotification()
+                FacilityRequestsScreen()
             }
             3 -> {
+                FacilityNotification()
+            }
+            4 -> {
                 FeedbackRating()
             }
             else -> getItem(position)
