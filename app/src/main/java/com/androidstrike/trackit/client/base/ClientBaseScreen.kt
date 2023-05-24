@@ -4,12 +4,22 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.androidstrike.trackit.R
 import com.androidstrike.trackit.databinding.FragmentClientBaseScreenBinding
-import com.androidstrike.trackit.databinding.FragmentFacilityBaseScreenBinding
+import com.androidstrike.trackit.utils.Common
+import com.androidstrike.trackit.utils.Common.auth
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ClientBaseScreen : Fragment() {
 
@@ -22,12 +32,21 @@ class ClientBaseScreen : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentClientBaseScreenBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding){
+
+            (activity as AppCompatActivity).setSupportActionBar(binding.clientToolBar)
+
+            binding.clientToolBar.title = Common.clientName
+
+
+
             //set the title to be displayed on each tab
             clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("Home Screen"))
             clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("Digital Wallet"))
@@ -74,6 +93,27 @@ class ClientBaseScreen : Fragment() {
 
         }
     }
+
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_logout, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.logout -> {
+                auth.signOut()
+                val navToStart = ClientBaseScreenDirections.actionClientBaseScreenToLandingFragment()
+                findNavController().navigate(navToStart)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+
 
 
 

@@ -6,11 +6,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".client.base.ClientBaseScreen">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/client_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Recovery Scape"
+        app:menu="@menu/menu_logout"
+        android:elevation="4dp"
+        />
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/client_base_tab_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="6dp"
+        android:layout_below="@id/client_tool_bar"
         android:minHeight="?attr/actionBarSize"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"

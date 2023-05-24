@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.androidstrike.trackit.R
 import com.androidstrike.trackit.databinding.FragmentSignInBinding
 import com.androidstrike.trackit.utils.Common
+import com.androidstrike.trackit.utils.Common.clientName
 import com.androidstrike.trackit.utils.enable
 import com.androidstrike.trackit.utils.showProgressDialog
 import com.androidstrike.trackit.utils.toast
@@ -116,9 +117,38 @@ class SignIn : Fragment() {
                                 hideProgress()
 
                                 if (role == "client"){
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        val clientRef = Common.clientCollectionRef.document(mAuth.uid.toString())
+                                        clientRef.get()
+                                            .addOnSuccessListener { documentSnapshot ->
+                                                if (documentSnapshot.exists()) {
+                                                    clientName = documentSnapshot.getString("userFirstName")!!
+                                                    // Use the value here
+                                                }
+                                            }
+                                            .addOnFailureListener { exception ->
+                                                // Handle the failure case here
+                                            }
+                                        withContext(Dispatchers.Main){
+                                        }
+                                    }
                                     val navToHome = SignInDirections.actionSignInToClientBaseScreen()
                                     findNavController().navigate(navToHome)
                                 }else{
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        val facilityRef = Common.facilityCollectionRef.document(
+                                            Common.auth.uid.toString())
+                                        facilityRef.get()
+                                            .addOnSuccessListener { documentSnapshot ->
+                                                if (documentSnapshot.exists()) {
+                                                    Common.facilityName = documentSnapshot.getString("facilityName")!!
+                                                    // Use the value here
+                                                }
+                                            }
+                                            .addOnFailureListener { exception ->
+                                                // Handle the failure case here
+                                            }
+                                    }
                                     val navToFacilityHome = SignInDirections.actionSignInToFacilityBaseScreen()
                                     findNavController().navigate(navToFacilityHome)
 

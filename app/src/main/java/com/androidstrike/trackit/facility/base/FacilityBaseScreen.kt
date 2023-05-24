@@ -4,11 +4,23 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.androidstrike.trackit.R
+import com.androidstrike.trackit.client.base.ClientBaseScreenDirections
 import com.androidstrike.trackit.databinding.FragmentFacilityBaseScreenBinding
+import com.androidstrike.trackit.utils.Common
+import com.androidstrike.trackit.utils.Common.auth
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FacilityBaseScreen : Fragment() {
 
@@ -21,6 +33,8 @@ class FacilityBaseScreen : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentFacilityBaseScreenBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -28,6 +42,13 @@ class FacilityBaseScreen : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding){
+
+            (activity as AppCompatActivity).setSupportActionBar(binding.facilityToolBar)
+            var facilityName = ""
+            binding.facilityToolBar.title = Common.facilityName
+
+
+
             //set the title to be displayed on each tab
             facilityBaseTabTitle.addTab(facilityBaseTabTitle.newTab().setText("Profile"))
             facilityBaseTabTitle.addTab(facilityBaseTabTitle.newTab().setText("Add Service"))
@@ -73,53 +94,26 @@ class FacilityBaseScreen : Fragment() {
             })
 
         }
-//        val bottomNavView = binding.bottomNavView
-//
-//        loadFragment(FacilityRequestsScreen())
-//       // val navHostFragment = childFragmentManager.findFragmentById(R.id.facility_base_fragment_container) as NavHostFragment
-//        //val navController = navHostFragment.navController
-//
-//// Connect the bottom navigation view with the navigation controller
-//       // bottomNavView.setupWithNavController(navController)
-//
-//
-//        bottomNavView.setOnItemSelectedListener { menuItem ->
-//            when (menuItem.itemId) {
-//                R.id.facility_navigation_customer_requests -> {
-//                    // Handle item 1 selection
-//                    val fragment1 = FacilityRequestsScreen()
-//                    loadFragment(fragment1)
-//                    true
-//                }
-//                R.id.facility_navigation_profile -> {
-//                    // Handle item 2 selection
-//                    val fragment2 = FacilityProfile()
-//                    loadFragment(fragment2)
-//                    true
-//                }
-//                R.id.facility_navigation_invoice -> {
-//                    // Handle item 2 selection
-//                    requireContext().toast("Invoice Feature Coming")
-//                    true
-//                }
-//                R.id.facility_navigation_feedback -> {
-//                    // Handle item 2 selection
-//                    requireContext().toast("Feedback Feature Coming")
-//                    true
-//                }
-//                // Handle other menu items as needed
-//                else -> false
-//            }
-//        }
-//
 
     }
-//
-//    private  fun loadFragment(fragment: Fragment){
-//        val transaction = childFragmentManager.beginTransaction()
-//        transaction.replace(R.id.facility_base_fragment_container,fragment)
-//        transaction.commit()
-//    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_logout, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.logout -> {
+                Common.auth.signOut()
+                val navToStart = FacilityBaseScreenDirections.actionFacilityBaseScreenToLandingFragment()
+                findNavController().navigate(navToStart)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 
     override fun onDestroyView() {

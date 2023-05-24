@@ -12,6 +12,9 @@ import java.util.*
 
 object Common {
 
+    var facilityName = "Facility"
+    var clientName = "Client"
+
     //lateinit var mAuth: FirebaseAuth// = FirebaseAuth.getInstance()
     val auth = FirebaseAuth.getInstance()
     val clientCollectionRef = Firebase.firestore.collection("Clients")

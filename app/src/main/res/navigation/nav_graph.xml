@@ -77,10 +77,17 @@
         <action
             android:id="@+id/action_facilityBaseScreen_to_signIn"
             app:destination="@id/signIn" />
+        <action
+            android:id="@+id/action_facilityBaseScreen_to_landingFragment"
+            app:destination="@id/landingFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientBaseScreen"
         android:name="com.androidstrike.trackit.client.base.ClientBaseScreen"
         android:label="fragment_client_base_screen"
-        tools:layout="@layout/fragment_client_base_screen" />
+        tools:layout="@layout/fragment_client_base_screen" >
+        <action
+            android:id="@+id/action_clientBaseScreen_to_landingFragment"
+            app:destination="@id/landingFragment" />
+    </fragment>
 </navigation>
