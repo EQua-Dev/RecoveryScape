@@ -17,6 +17,8 @@ class ClientBookingResponseScreenAdapter(itemView: View): RecyclerView.ViewHolde
     var facilityEmail: TextView
     var facilityPhone: TextView
     var clientBookingResponseStatusIndicator: CardView
+    var clientBookingResponseViewDetailsButton: Button
+    var clientBookingResponseRateServiceButton: Button
 
     init {
         dateCreated = itemView.findViewById(R.id.txt_client_booking_response_date_created)
@@ -26,6 +28,8 @@ class ClientBookingResponseScreenAdapter(itemView: View): RecyclerView.ViewHolde
         facilityEmail = itemView.findViewById(R.id.txt_client_booking_result_facility_email)
         facilityPhone = itemView.findViewById(R.id.txt_client_booking_result_facility_phone)
         clientBookingResponseStatusIndicator = itemView.findViewById(R.id.client_booking_response_status_indicator)
+        clientBookingResponseViewDetailsButton = itemView.findViewById(R.id.client_notification_view_details_btn)
+        clientBookingResponseRateServiceButton = itemView.findViewById(R.id.client_notification_rate_service_btn)
 
 
     }

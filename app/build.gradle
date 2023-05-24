@@ -124,5 +124,9 @@ dependencies {
     implementation "com.airbnb.android:lottie:4.2.0"
     implementation 'io.github.amrdeveloper:lottiedialog:1.0.0'
 
+    //Rating
+    implementation 'com.iarcuschin:simpleratingbar:0.1.5'
+
+
 
 }

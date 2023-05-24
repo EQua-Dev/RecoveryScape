@@ -23,6 +23,7 @@ import com.androidstrike.trackit.utils.getDate
 import com.androidstrike.trackit.utils.toast
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
@@ -91,6 +92,12 @@ class ClientNotification : Fragment() {
                     model: BookService
                 ) {
 
+
+                    val clientBaseFragment = parentFragment
+                    val clientTabLayout =
+                        clientBaseFragment!!.view?.findViewById<TabLayout>(R.id.client_base_tab_title)
+
+
                     Log.d("EQUA", "onBindViewHolder: ${model.clientId}")
                     var responseState: String = ""
                     when(model.status){
@@ -115,13 +122,19 @@ class ClientNotification : Fragment() {
 
                     getFacilityDetails(model.facilityId, holder.facilityName, holder.facilityEmail, holder.facilityPhone )
 
-//                    holder.facilityName.text = respondingFacility.facilityName
-//                    holder.facilityEmail.text = respondingFacility.facilityEmail
-//                    holder.facilityPhone.text = respondingFacility.facilityPhoneNumber
-
-                    holder.itemView.setOnClickListener {
-                        requireContext().toast("pop up dialog of details")
+                    holder.clientBookingResponseViewDetailsButton.setOnClickListener {
                         launchDetailDialog(model)
+                    }
+
+                    holder.clientBookingResponseRateServiceButton.setOnClickListener {
+                        val ratingsTab = clientTabLayout?.getTabAt(4)
+                        ratingsTab?.let {
+                            val fragment = clientBaseFragment as Fragment // Replace with your own fragment class
+                            val args = Bundle()
+                            args.putString("serviceId", model.selectedAppointmentServiceID)
+                            fragment.arguments = args
+                        }
+                        clientTabLayout?.getTabAt(4)?.select()
                     }
 
                 }

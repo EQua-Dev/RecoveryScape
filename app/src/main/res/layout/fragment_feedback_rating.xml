@@ -20,85 +20,44 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/client_rating_facility_name"
             android:layout_marginStart="@dimen/padding_mini"
             android:layout_marginEnd="@dimen/padding_mini"
             android:padding="@dimen/padding_mini"
-            android:hint="@string/sign_up_facility_name"
-            android:textColorHint="@color/custom_facility_accent_color">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/sign_up_first_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+            tools:text="Rehab Facility Name"/>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_sign_up_facility_email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/client_rating_facility_phone_number"
             android:layout_marginStart="@dimen/padding_mini"
             android:layout_marginEnd="@dimen/padding_mini"
             android:padding="@dimen/padding_mini"
-            android:hint="@string/sign_up_facility_email"
-            android:textColorHint="@color/custom_facility_accent_color">
+            tools:text="@tools:sample/us_phones"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/sign_up_facility_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/sign_up_facility_email"
-                android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
-                android:labelFor="@id/sign_up_facility_email" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_sign_up_facility_phone_number"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/client_rating_facility_email"
             android:layout_marginStart="@dimen/padding_mini"
             android:layout_marginEnd="@dimen/padding_mini"
             android:padding="@dimen/padding_mini"
-            android:hint="@string/sign_up_facility_phone_number"
-            android:textColorHint="@color/custom_facility_accent_color">
+            tools:text="rehab@email.com"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/sign_up_facility_phone_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/sign_up_facility_phone_number"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="11"
-                android:labelFor="@id/sign_up_facility_phone_number" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/client_rating_client_name"
             android:layout_marginStart="@dimen/padding_mini"
             android:layout_marginEnd="@dimen/padding_mini"
             android:padding="@dimen/padding_mini"
-            android:hint="@string/rating_customer_name"
-            android:textColorHint="@color/custom_facility_accent_color">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/sign_up_facility_phone_number"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
+            tools:text="@tools:sample/full_names"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -108,57 +67,42 @@
             android:layout_margin="@dimen/padding_mini"
             android:textColor="@color/black"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.iarcuschin.simpleratingbar.SimpleRatingBar
+            android:id="@+id/client_rating_bar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="@dimen/margin_midi">
+            app:srb_numberOfStars="5"
+            app:srb_starSize="24dp"
+            app:srb_borderColor="#C0C0C0"
+            app:srb_fillColor="@color/custom_facility_accent_color"
+            android:layout_marginStart="@dimen/margin_midi"/>
 
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_star_rate"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_star_rate"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_star_rate"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_star_rate"/>
-
-        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_client_rating_feedback_text"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_mini"
             android:layout_marginEnd="@dimen/padding_mini"
             android:padding="@dimen/padding_mini"
-            android:hint="@string/sign_up_facility_phone_number"
+            android:hint="@string/client_rating_feedback_text"
             android:textColorHint="@color/custom_facility_accent_color">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/client_rating_feedback_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/rating_feedback_prompt"
+                android:contentDescription="@string/client_rating_feedback_text"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:lines="4"
-                android:labelFor="@id/sign_up_facility_phone_number" />
+                android:labelFor="@id/client_rating_feedback_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/client_rating_submit_button"
             android:layout_width="@dimen/button_width_xxl"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_mini"

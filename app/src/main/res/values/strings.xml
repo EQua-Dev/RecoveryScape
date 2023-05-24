@@ -121,6 +121,10 @@
     <string name="rating_feedback_prompt">Enter your feedback</string>
     <string name="feedback_submit">Send</string>
     <string name="rating_title">Give Your Feedback</string>
+    <string name="client_notification_view_btn">View Details</string>
+    <string name="client_notification_rate_btn">Rate Service</string>
+    <string name="client_rating_feedback_text">Type your feedback</string>
+    <string name="ignore">Ignore Text</string>
 
     <string-array name="service_available_places_option">
         <item>Yes</item>

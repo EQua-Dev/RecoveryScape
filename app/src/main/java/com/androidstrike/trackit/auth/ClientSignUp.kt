@@ -191,10 +191,7 @@ class ClientSignUp : Fragment() {
             getCurrentLocation()
         }
 
-        binding.accountSignupBtnSignup.enable(firstNameOkay && lastNameOkay && emailOkay && addressOkay && phoneNumberOkay && passwordOkay && confirmPasswordOkay)
-
         binding.accountSignupBtnSignup.setOnClickListener {
-
 
             userFirstName = binding.signUpFirstName.text.toString().trim()
             userLastName = binding.signUpLastName.text.toString().trim()
@@ -206,15 +203,34 @@ class ClientSignUp : Fragment() {
             //userAddressLongitude, userAddressLatitude
 
 
-            registerClient(
-                userFirstName,
-                userLastName,
-                userEmail,
-                userAddress,
-                userPassword,
-                userAddressLongitude, userAddressLatitude,
-                userPhoneNumber
-            )
+            if (!firstNameOkay || !lastNameOkay || !emailOkay || !addressOkay || !phoneNumberOkay || !passwordOkay || !confirmPasswordOkay){
+                requireContext().toast("Invalid input")
+            }
+            if (
+                userFirstName.isEmpty() ||
+                userLastName.isEmpty() ||
+                userEmail.isEmpty() ||
+                userAddress.isEmpty() ||
+                userPassword.isEmpty() ||
+                userConfirmPassword.isEmpty() ||
+                userPhoneNumber.isEmpty()
+            ){
+                requireContext().toast("Missing fields")
+            }else{
+                registerClient(
+                    userFirstName,
+                    userLastName,
+                    userEmail,
+                    userAddress,
+                    userPassword,
+                    userAddressLongitude, userAddressLatitude,
+                    userPhoneNumber
+                )
+            }
+
+
+
+
         }
 
 
