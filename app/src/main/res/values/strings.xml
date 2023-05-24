@@ -100,6 +100,9 @@
     <string name="facility_new_record_confirm_btn">Confirm Invoice Generation</string>
     <string name="txt_invoice_status_not_generated">not generated</string>
     <string name="txt_invoice_status_generated">generated</string>
+    <string name="txt_invoice_payment_status_paid">paid</string>
+    <string name="txt_invoice_payment_status_not_paid">not paid</string>
+    <string name="client_generated_invoice_payment_button">Provide Payment</string>
 
     <string-array name="service_available_places_option">
         <item>Yes</item>

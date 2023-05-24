@@ -19,5 +19,6 @@ data class BookService(
     val invoiceAccountIBAN: String = "",
     val invoiceAccountName: String = "",
     val invoiceGeneratedTime: Long = 0,
-    val invoiceGenerated: Boolean = false
+    val invoiceGenerated: Boolean = false,
+    val invoicePaid: Boolean = false
     )
