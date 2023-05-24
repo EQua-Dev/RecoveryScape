@@ -20,6 +20,7 @@ import com.androidstrike.trackit.model.BookService
 import com.androidstrike.trackit.model.Facility
 import com.androidstrike.trackit.utils.Common
 import com.androidstrike.trackit.utils.getDate
+import com.androidstrike.trackit.utils.snackbar
 import com.androidstrike.trackit.utils.toast
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -123,7 +124,10 @@ class ClientNotification : Fragment() {
                     getFacilityDetails(model.facilityId, holder.facilityName, holder.facilityEmail, holder.facilityPhone )
 
                     holder.clientBookingResponseViewDetailsButton.setOnClickListener {
-                        launchDetailDialog(model)
+                        if(responseState == "accepted")
+                            launchDetailDialog(model)
+                        else
+                            requireView().snackbar("Your request is still pending")
                     }
 
                     holder.clientBookingResponseRateServiceButton.setOnClickListener {
@@ -134,6 +138,7 @@ class ClientNotification : Fragment() {
                             args.putString("serviceId", model.selectedAppointmentServiceID)
                             fragment.arguments = args
                         }
+                        Common.serviceToRate = model.selectedAppointmentServiceID
                         clientTabLayout?.getTabAt(4)?.select()
                     }
 

@@ -48,7 +48,7 @@ class FeedbackRating : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val serviceId = arguments?.getString("serviceId")
+        val serviceId = Common.serviceToRate
 
         var customerRating: Float = 0.0F
 
@@ -56,10 +56,10 @@ class FeedbackRating : Fragment() {
         val tvFacilityEmail = binding.clientRatingFacilityEmail
         val tvFacilityPhoneNumber = binding.clientRatingFacilityPhoneNumber
         val tvClientName = binding.clientRatingFacilityName
-        var etFeedbackText = binding.clientRatingFeedbackText
-        var tilFeedbackText = binding.textInputLayoutClientRatingFeedbackText
+        val etFeedbackText = binding.clientRatingFeedbackText
+        val tilFeedbackText = binding.textInputLayoutClientRatingFeedbackText
 
-        getServiceDetails(serviceId!!, tvFacilityName, tvFacilityEmail, tvFacilityPhoneNumber)
+        getServiceDetails(Common.serviceToRate, tvFacilityName, tvFacilityEmail, tvFacilityPhoneNumber)
 
         Common.clientCollectionRef.document(auth.uid.toString()).get()
             .addOnSuccessListener { documentSnapshot ->
