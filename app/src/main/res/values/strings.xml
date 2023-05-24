@@ -116,6 +116,11 @@
     <string name="fund_digital_wallet_amount">Enter amount</string>
     <string name="fund_wallet_proceed">Proceed</string>
     <string name="fund_wallet_cancel">Cancel</string>
+    <string name="rating_customer_name">Enter Your Name</string>
+    <string name="rate_text">Choose your rating</string>
+    <string name="rating_feedback_prompt">Enter your feedback</string>
+    <string name="feedback_submit">Send</string>
+    <string name="rating_title">Give Your Feedback</string>
 
     <string-array name="service_available_places_option">
         <item>Yes</item>
