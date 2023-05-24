@@ -74,7 +74,7 @@ class SignIn : Fragment() {
 
         }
         binding.accountLogInForgotPasswordPrompt.setOnClickListener {
-            val navToForgotPassword = SignInDirections.actionSignInToForgotPassword()
+            val navToForgotPassword = SignInDirections.actionSignInToForgotPassword(role)
             findNavController().navigate(navToForgotPassword)
         }
 

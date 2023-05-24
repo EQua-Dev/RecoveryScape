@@ -8,10 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androidstrike.trackit.R
 import com.androidstrike.trackit.databinding.FragmentClientNotificationBinding
+import com.androidstrike.trackit.facility.facilityservice.Service
 import com.androidstrike.trackit.model.BookService
 import com.androidstrike.trackit.model.Facility
 import com.androidstrike.trackit.utils.Common
@@ -32,6 +36,8 @@ class ClientNotification : Fragment() {
 
     private var progressDialog: Dialog? = null
     lateinit var respondingFacility : Facility
+    lateinit var scheduledService: Service
+
 
 
     private var _binding: FragmentClientNotificationBinding? = null
@@ -49,6 +55,7 @@ class ClientNotification : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         respondingFacility = Facility()
+        scheduledService = Service()
         getRealtimeResponses()
 
         with(binding){
@@ -84,7 +91,6 @@ class ClientNotification : Fragment() {
                     model: BookService
                 ) {
 
-                    getFacilityDetails(model.facilityId)
                     Log.d("EQUA", "onBindViewHolder: ${model.clientId}")
                     var responseState: String = ""
                     when(model.status){
@@ -106,12 +112,16 @@ class ClientNotification : Fragment() {
                     holder.dateCreated.text = getDate(model.dateBooked.toLong(), "dd MMMM, yyyy")
                     holder.timeCreated.text = getDate(model.dateBooked.toLong(), "HH:mm a")
                     holder.responseDescription.text = "Dear Customer,\n\nYour request is $responseState."
-                    holder.facilityName.text = respondingFacility.facilityName
-                    holder.facilityEmail.text = respondingFacility.facilityEmail
-                    holder.facilityPhone.text = respondingFacility.facilityPhoneNumber
+
+                    getFacilityDetails(model.facilityId, holder.facilityName, holder.facilityEmail, holder.facilityPhone )
+
+//                    holder.facilityName.text = respondingFacility.facilityName
+//                    holder.facilityEmail.text = respondingFacility.facilityEmail
+//                    holder.facilityPhone.text = respondingFacility.facilityPhoneNumber
 
                     holder.itemView.setOnClickListener {
                         requireContext().toast("pop up dialog of details")
+                        launchDetailDialog(model)
                     }
 
                 }
@@ -125,7 +135,60 @@ class ClientNotification : Fragment() {
         binding.rvClientBookingResult.adapter = clientBookingResponseScreenAdapter
     }
 
-    private fun getFacilityDetails(facilityId: String) = CoroutineScope(Dispatchers.IO).launch {
+    private fun launchDetailDialog(model: BookService) {
+
+        val builder = layoutInflater.inflate(R.layout.client_notification_detail_dialog_layout, null)
+
+        getServiceDetails(model.facilityId, model.selectedAppointmentServiceID)
+
+        val tvDateCreated = builder.findViewById<TextView>(R.id.txt_client_booking_response_detail_date_created)
+        val tvDateTimeCreated = builder.findViewById<TextView>(R.id.txt_client_booking_response_detail_time_created)
+        val tvDetailText = builder.findViewById<TextView>(R.id.txt_client_booking_result_detail_description)
+
+        val btnOkay = builder.findViewById<Button>(R.id.btn_client_booking_response_detail_okay)
+
+        tvDateCreated.text = getDate(model.dateResponded.toLong(), "dd MMMM, yyyy")
+        tvDateTimeCreated.text = getDate(model.dateResponded.toLong(), "hh:mm a")
+        tvDetailText.text = "Dear Customer,\n\nThis is to confirm that your request has been accepted for service: ${scheduledService.serviceDescription}\n\nPlease come for the initial meeting at:\n\nDate: ${model.scheduledDate}\nTime: ${model.scheduledTime}\n\nWe will be happy to see you there"
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(builder)
+            .setCancelable(false)
+            .create()
+
+
+        btnOkay.setOnClickListener {
+            dialog.dismiss()
+        }
+
+
+
+        dialog.show()
+
+
+
+    }
+
+    private fun getServiceDetails(facilityId: String, serviceId: String) = CoroutineScope(Dispatchers.IO).launch {
+        Common.servicesCollectionRef
+            .get()
+            .addOnSuccessListener { querySnapshot: QuerySnapshot ->
+
+                for (document in querySnapshot.documents) {
+                    val item = document.toObject(Service::class.java)
+                    if (item?.serviceID == serviceId) {
+                        scheduledService = item
+                    }
+                }
+            }
+    }
+
+    private fun getFacilityDetails(
+        facilityId: String,
+        facilityName: TextView,
+        facilityEmail: TextView,
+        facilityPhone: TextView
+    ) = CoroutineScope(Dispatchers.IO).launch {
         Common.facilityCollectionRef
             .get()
             .addOnSuccessListener { querySnapshot: QuerySnapshot ->
@@ -138,6 +201,9 @@ class ClientNotification : Fragment() {
                         respondingFacility = item
                     }
                 }
+                facilityName.text = respondingFacility.facilityName
+                facilityEmail.text = respondingFacility.facilityEmail
+                facilityPhone.text = respondingFacility.facilityPhoneNumber
             }
     }
 }

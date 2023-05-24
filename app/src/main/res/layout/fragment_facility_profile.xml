@@ -9,21 +9,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="@string/profile_title"
-        android:textSize="@dimen/text_xl"
-        android:textColor="@color/black"
-        android:layout_margin="@dimen/margin_midi"
-        android:padding="@dimen/padding_mini"
-        android:id="@+id/txt_facility_profile_title"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/profile_name"
         android:padding="@dimen/padding_mini"
         android:textSize="@dimen/text_xxs"
-        android:layout_below="@id/txt_facility_profile_title"
         android:id="@+id/txt_facility_profile_name_title"/>
 
     <TextView
@@ -132,12 +120,15 @@
         android:id="@+id/txt_facility_profile_services"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/facility_edit_profile_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/facility_edit_profile"
-        android:id="@+id/facility_edit_profile"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/margin_midi"/>
+        android:layout_marginStart="@dimen/margin_midi"
+        android:layout_marginTop="@dimen/margin_midi"
+        android:layout_marginEnd="@dimen/margin_midi"
+        android:layout_marginBottom="@dimen/margin_midi"
+        android:text="@string/facility_edit_profile" />
 
 
 

@@ -15,9 +15,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
+import com.androidstrike.trackit.R
 import com.androidstrike.trackit.databinding.FragmentClientSignUpBinding
 import com.androidstrike.trackit.model.Client
 import com.androidstrike.trackit.utils.Common
+import com.androidstrike.trackit.utils.enable
 import com.androidstrike.trackit.utils.showProgressDialog
 import com.androidstrike.trackit.utils.toast
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -49,6 +51,9 @@ class ClientSignUp : Fragment() {
     lateinit var userPassword: String
     lateinit var userConfirmPassword: String
 
+    var firstNameOkay = false
+    var lastNameOkay = false
+    var addressOkay = false
     var passwordOkay = false
     var emailOkay = false
     var phoneNumberOkay = false
@@ -75,6 +80,67 @@ class ClientSignUp : Fragment() {
         geocoder = Geocoder(requireContext(), Locale.getDefault())
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        binding.signUpFirstName.setOnFocusChangeListener { v, hasFocus ->
+            val firstNameLayout = v as TextInputEditText
+            val firstNameText = firstNameLayout.text.toString()
+            userFirstName = firstNameText
+            if (!hasFocus) {
+                if (userFirstName.isEmpty()) {
+                    binding.textInputLayoutSignUpFirstName.error =
+                        "Enter first name" // Display an error message
+                } else {
+                    binding.textInputLayoutSignUpPassword.error = null // Clear any previous error
+                    firstNameOkay = true
+                }
+            }
+        }
+
+        binding.signUpLastName.setOnFocusChangeListener { v, hasFocus ->
+            val lastNameLayout = v as TextInputEditText
+            val lastNameText = lastNameLayout.text.toString()
+            userLastName = lastNameText
+            if (!hasFocus) {
+                if (userLastName.isEmpty()) {
+                    binding.textInputLayoutSignUpLastName.error =
+                        "Enter last name" // Display an error message
+                } else {
+                    binding.textInputLayoutSignUpLastName.error = null // Clear any previous error
+                    lastNameOkay = true
+                }
+            }
+        }
+
+        binding.signUpAddress.setOnFocusChangeListener { v, hasFocus ->
+            val addressLayout = v as TextInputEditText
+            val addressText = addressLayout.text.toString()
+            userAddress = addressText
+            if (!hasFocus) {
+                if (userAddress.isEmpty()) {
+                    binding.textInputLayoutSignUpAddress.error =
+                        "Enter last name" // Display an error message
+                } else {
+                    binding.textInputLayoutSignUpAddress.error = null // Clear any previous error
+                    addressOkay = true
+                }
+            }
+        }
+
+        binding.signUpPhoneNumber.setOnFocusChangeListener { v, hasFocus ->
+            val phoneNumberLayout = v as TextInputEditText
+            val phoneNumberText = phoneNumberLayout.text.toString()
+            userPhoneNumber = phoneNumberText
+            if (!hasFocus) {
+                if (userPhoneNumber.isEmpty() || userPhoneNumber.length < resources.getInteger(R.integer.phone_number_length)) {
+                    binding.textInputLayoutSignUpPhoneNumber.error =
+                        "Phone number must be ${resources.getInteger(R.integer.phone_number_length)} characters" // Display an error message
+                } else {
+                    binding.textInputLayoutSignUpPhoneNumber.error =
+                        null // Clear any previous error
+                    phoneNumberOkay = true
+                }
+            }
+        }
+
         binding.signUpPassword.setOnFocusChangeListener { v, hasFocus ->
             val passwordLayout = v as TextInputEditText
             val passwordText = passwordLayout.text.toString()
@@ -88,7 +154,7 @@ class ClientSignUp : Fragment() {
                         "Password must contain at least one digit, uppercase, lowercase, special character and 8 characters" // Display an error message
                 }
             }
-            }
+        }
 
         binding.signUpConfirmPassword.setOnFocusChangeListener { v, hasFocus ->
             val confirmPasswordLayout = v as TextInputEditText
@@ -96,18 +162,20 @@ class ClientSignUp : Fragment() {
 
             if (!hasFocus) {
                 if (confirmPasswordText != userPassword) {
-                    binding.textInputLayoutSignUpConfirmPassword.error = null // Clear any previous error
+                    binding.textInputLayoutSignUpConfirmPassword.error =
+                        null // Clear any previous error
                     confirmPasswordOkay = true
                 } else {
                     binding.textInputLayoutSignUpConfirmPassword.error =
-                        "Password does not match" // Display an error message
+                        resources.getText(R.string.password_does_not_match) // Display an error message
                 }
             }
-            }
+        }
 
         binding.signUpEmail.setOnFocusChangeListener { v, hasFocus ->
             val emailLayout = v as TextInputEditText
             val emailText = emailLayout.text.toString()
+            userEmail = emailText
             if (!hasFocus) {
                 if (Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
                     binding.textInputLayoutSignUpEmail.error = null // Clear any previous error
@@ -117,13 +185,17 @@ class ClientSignUp : Fragment() {
                         "Enter valid email" // Display an error message
                 }
             }
-            }
+        }
 
         binding.signUpAddressSelectMyLocation.setOnClickListener {
             getCurrentLocation()
         }
 
+        binding.accountSignupBtnSignup.enable(firstNameOkay && lastNameOkay && emailOkay && addressOkay && phoneNumberOkay && passwordOkay && confirmPasswordOkay)
+
         binding.accountSignupBtnSignup.setOnClickListener {
+
+
             userFirstName = binding.signUpFirstName.text.toString().trim()
             userLastName = binding.signUpLastName.text.toString().trim()
             userEmail = binding.signUpEmail.text.toString().trim()
@@ -274,7 +346,6 @@ class ClientSignUp : Fragment() {
     }
 
 
-
     fun isPasswordValid(password: String): Boolean {
         val pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$".toRegex()
         return pattern.matches(password)
@@ -313,7 +384,7 @@ class ClientSignUp : Fragment() {
                     // Do something with the latitude and longitude values
                 }
             })
-    //}
+        //}
 //        mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
 //            val location: Location? = task.result
 //
@@ -331,7 +402,6 @@ class ClientSignUp : Fragment() {
 //        }
 
     }
-
 
 
     private fun showProgress() {

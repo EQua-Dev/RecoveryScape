@@ -27,7 +27,14 @@
         android:id="@+id/forgotPassword"
         android:name="com.androidstrike.trackit.auth.ForgotPassword"
         android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" />
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPassword_to_signIn"
+            app:destination="@id/signIn" />
+        <argument
+            android:name="role"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/clientSignUp"
         android:name="com.androidstrike.trackit.auth.ClientSignUp"

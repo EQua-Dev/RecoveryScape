@@ -10,9 +10,9 @@
 
     <string name="sign_in_subtitle">Enter details to log in</string>
     <string name="account_btn_login">Log In</string>
-    <string name="account_log_in_forgot_password_prompt">Forgot Password</string>
+    <string name="account_log_in_forgot_password_prompt">Forgotten Password? Reset Password here</string>
     <string name="sign_in_email">Username</string>
-    <string name="account_not_logged_in_create_account">First Time User, Register here</string>
+    <string name="account_not_logged_in_create_account">First Time User? Register here</string>
     <string name="sign_in_password">Password</string>
     <string name="sign_up_title">Register</string>
     <string name="sign_up_subtitle">Enter details to sign up</string>
@@ -38,7 +38,7 @@
     <string name="forgot_password_title">Forgot Password\n</string>
     <string name="forgot_password_subtitle">Enter Registered Email to Reset Passsword</string>
     <string name="account_forgot_password_log_in_prompt">Remembered Password</string>
-    <string name="account_btn_reset_password">Reset Password</string>
+    <string name="account_btn_reset_password">Send Reset Link</string>
     <string name="sign_up_facility_name">Enter Facility Name</string>
     <string name="sign_up_facility_physical_address">Enter Facilty Physical Address</string>
     <string name="sign_up_facility_email">Enter Facility Email Address</string>
@@ -74,7 +74,7 @@
     <string name="notification_placeholder">View Notification</string>
     <string name="facility_add_service_title">Add Service to Facility Profile</string>
     <string name="facility_add_service_category">Category</string>
-    <string name="facility_add_service_description">Service Description</string>
+    <string name="facility_add_service_description">Service Name</string>
     <string name="facility_add_service_price">Service Price ($)</string>
     <string name="facility_add_service_discounted_price">Discounted Price (%) (leave empty if nil)</string>
     <string name="add_service_available_places">Service Available Places</string>
@@ -104,6 +104,18 @@
     <string name="txt_invoice_payment_status_not_paid">not paid</string>
     <string name="client_generated_invoice_payment_button">Provide Payment</string>
     <string name="menu_logout">Logout</string>
+    <string name="facility_submit_update_profile">Submit</string>
+    <string name="facility_update_profile_title">Update Profile</string>
+    <string name="facility_update_profile_phone_number">New Contact Number</string>
+    <string name="facility_cancel_update_profile">Cancel</string>
+    <string name="btn_client_booking_response_detail_okay">Okay</string>
+    <string name="password_does_not_match">Entered Password and Retyped password do not match, please retype the correct value</string>
+    <string name="create_digital_wallet">Create Digital Wallet</string>
+    <string name="fund_digital_wallet">Fund Digital Wallet</string>
+    <string name="fund_digital_wallet_amount_title">"Amount ($): "</string>
+    <string name="fund_digital_wallet_amount">Enter amount</string>
+    <string name="fund_wallet_proceed">Proceed</string>
+    <string name="fund_wallet_cancel">Cancel</string>
 
     <string-array name="service_available_places_option">
         <item>Yes</item>
