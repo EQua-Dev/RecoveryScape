@@ -20,6 +20,10 @@
         <item name="itemTextColor">@color/black</item>
     </style>
 
+    <style name="FacilityHintTextColor" parent="TextAppearance.AppCompat">
+        <item name="hintTextColor">@color/custom_facility_accent_color</item>
+    </style>
+
     <style name="TabTextAppearance" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">12sp</item>
     </style>

@@ -107,7 +107,7 @@ class FacilitySignUp : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 val input = p0.toString()
-                if (input == binding.signUpFacilityConfirmPassword.text.toString().trim()) {
+                if (input == binding.signUpFacilityPassword.text.toString().trim()) {
                     binding.textInputLayoutSignUpFacilityConfirmPassword.error =
                         null // Clear any previous error
                     confirmPasswordOkay = true

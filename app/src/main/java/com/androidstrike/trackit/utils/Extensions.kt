@@ -36,7 +36,7 @@ fun Context.toast(message: String) =
 fun View.snackbar(message: String, action: (() -> Unit)? = null) {
     val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
     action?.let {
-        snackbar.setAction("Retry") {
+        snackbar.setAction("Okay") {
             it()
         }
     }

@@ -133,6 +133,28 @@
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_sign_up_phone_number"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_mini"
+                    android:layout_marginEnd="@dimen/padding_mini"
+                    android:padding="@dimen/padding_mini"
+                    android:hint="@string/sign_up_phone_number"
+                    android:textColorHint="@color/custom_client_accent_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sign_up_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/sign_up_phone_number"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:maxLength="@integer/phone_number_length"
+                        android:labelFor="@id/sign_up_phone_number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_input_layout_sign_up_email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"

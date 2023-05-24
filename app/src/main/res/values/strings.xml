@@ -82,6 +82,24 @@
     <string name="facility_add_service_schedule">Service Schedule (if applicable)</string>
     <string name="facility_add_service_submit_button">Submit</string>
     <string name="facility_add_service_next_service_button">Next Service</string>
+    <string name="facility_customer_request_generate_invoice">Generate Invoice</string>
+    <string name="facility_customer_request_rejected">rejected</string>
+    <string name="txt_reject_customer_request">Reject Request</string>
+    <string name="facility_schedule_meeting_title">Schedule Meeting</string>
+    <string name="facility_schedule_meeting_date">Schedule Meeting Start Date</string>
+    <string name="facility_schedule_meeting_time">Schedule Meeting Start Time</string>
+    <string name="facility_confirm_meeting_schedule">Confirm Meeting Schedule</string>
+    <string name="facility_generated_invoice_customer_details_title">Customer Details</string>
+    <string name="facility_generated_invoice_facility_details_title">Facility Details</string>
+    <string name="facility_generated_invoice_request_details_title">Request Details</string>
+    <string name="facility_generated_invoice_confirm_button">Create Invoice</string>
+    <string name="facility_new_record_title">Invoice Bank Record</string>
+    <string name="facility_new_record_bank_name">Bank Name</string>
+    <string name="facility_new_record_account_iban">Account IBAN</string>
+    <string name="facility_new_record_account_holder_name">Account Holder Name</string>
+    <string name="facility_new_record_confirm_btn">Confirm Invoice Generation</string>
+    <string name="txt_invoice_status_not_generated">not generated</string>
+    <string name="txt_invoice_status_generated">generated</string>
 
     <string-array name="service_available_places_option">
         <item>Yes</item>

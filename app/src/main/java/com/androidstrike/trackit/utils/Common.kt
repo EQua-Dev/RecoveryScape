@@ -17,6 +17,7 @@ object Common {
     val clientCollectionRef = Firebase.firestore.collection("Clients")
     val facilityCollectionRef = Firebase.firestore.collection("Facilities")
     val appointmentsCollectionRef = Firebase.firestore.collection("Appointments")
+    val servicesCollectionRef = Firebase.firestore.collection("Services")
 
     fun convertTimeStampToDate(time: Long): Date {
         return Date(Timestamp(time).time)

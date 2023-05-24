@@ -1,7 +1,8 @@
 package com.androidstrike.trackit.model
 
 data class BookService(
-    val selectedAppointmentService: String = "",
+    val selectedAppointmentServiceName: String = "",
+    val selectedAppointmentServiceID: String = "",
     val selectedAppointmentDate: String = "",
     val selectedAppointmentTime: String = "",
     val selectedAppointmentDescription: String = "",
@@ -10,4 +11,13 @@ data class BookService(
     val facilityId: String = "",
     val status: String = "",
     val dateResponded: String = "",
-)
+    val scheduled: Boolean = false,
+    val scheduledDate: String = "",
+    val scheduledTime: String = "",
+    val dateScheduled: String = "",
+    val invoiceBankName: String = "",
+    val invoiceAccountIBAN: String = "",
+    val invoiceAccountName: String = "",
+    val invoiceGeneratedTime: Long = 0,
+    val invoiceGenerated: Boolean = false
+    )

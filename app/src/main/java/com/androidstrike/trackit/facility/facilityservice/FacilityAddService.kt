@@ -13,6 +13,7 @@ import com.androidstrike.trackit.databinding.FragmentFacilityAddServiceBinding
 import com.androidstrike.trackit.model.BookService
 import com.androidstrike.trackit.utils.Common
 import com.androidstrike.trackit.utils.showProgressDialog
+import com.androidstrike.trackit.utils.snackbar
 import com.androidstrike.trackit.utils.toast
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
@@ -126,11 +127,13 @@ class FacilityAddService : Fragment() {
                 facilityAddServiceDescription.requestFocus()
             }
             if (serviceDiscountedPrice.isEmpty()) {
-                textInputLayoutFacilityAddServiceDiscountedPrice.error = "Enter Service Discounted Price"
+                textInputLayoutFacilityAddServiceDiscountedPrice.error =
+                    "Enter Service Discounted Price"
                 facilityAddServiceDiscountedPrice.requestFocus()
             }
             if (serviceAvailablePlacesOption.isEmpty()) {
-                textInputLayoutFacilityAddServiceAvailablePlaces.error = "Select Service Available Places Option"
+                textInputLayoutFacilityAddServiceAvailablePlaces.error =
+                    "Select Service Available Places Option"
                 facilityAddServiceAvailablePlaces.requestFocus()
             } else {
                 createService()
@@ -145,20 +148,21 @@ class FacilityAddService : Fragment() {
             try {
                 val addService = Service(
                     serviceCategory = serviceCategory,
-                            servicePrice = servicePrice,
-                            serviceDescription = serviceDescription,
-                            serviceDiscountedPrice = serviceDiscountedPrice,
-                            serviceAvailablePlacesOption = serviceAvailablePlacesOption,
-                            serviceStartEndDate = serviceStartEndDate,
-                            serviceSchedule = serviceSchedule,
-                            serviceID = serviceID
+                    servicePrice = servicePrice,
+                    serviceDescription = serviceDescription,
+                    serviceDiscountedPrice = serviceDiscountedPrice,
+                    serviceAvailablePlacesOption = serviceAvailablePlacesOption,
+                    serviceStartEndDate = serviceStartEndDate,
+                    serviceSchedule = serviceSchedule,
+                    serviceID = serviceID,
+                    serviceOwnerID = Common.auth.uid.toString()
                 )
 
                 //val appointmentQuery = Common.facilityCollectionRef.whereEqualTo("facilityId", facility.facilityId).get().await()
-                Common.facilityCollectionRef.document(Common.auth.uid.toString()).collection("Services").document(serviceID).set(addService)
+                Common.servicesCollectionRef.document(serviceID).set(addService)
 
-                withContext(Dispatchers.Main){
-                    with(binding){
+                withContext(Dispatchers.Main) {
+                    with(binding) {
                         facilityAddServiceCategory.text.clear()
                         facilityAddServiceDescription.text!!.clear()
                         facilityAddServicePrice.text!!.clear()
@@ -168,11 +172,11 @@ class FacilityAddService : Fragment() {
                         facilityAddServiceSchedule.text!!.clear()
                     }
                     hideProgress()
-                    requireContext().toast("Service Added")
+                    requireView().snackbar("Service Added")
                 }
                 //dismiss bottom sheet
 
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 requireContext().toast(e.message.toString())
             }
         }

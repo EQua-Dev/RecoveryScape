@@ -9,4 +9,5 @@ data class Service(
     val serviceStartEndDate: String = "",
     val serviceSchedule: String = "",
     val serviceID: String = "",
+    val serviceOwnerID: String = "",
 )

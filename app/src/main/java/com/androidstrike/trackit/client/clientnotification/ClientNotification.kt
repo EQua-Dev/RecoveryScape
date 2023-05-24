@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androidstrike.trackit.R
 import com.androidstrike.trackit.databinding.FragmentClientNotificationBinding
-import com.androidstrike.trackit.facility.requests.FacilitiesRequestScreenAdapter
 import com.androidstrike.trackit.model.BookService
-import com.androidstrike.trackit.model.Client
 import com.androidstrike.trackit.model.Facility
 import com.androidstrike.trackit.utils.Common
 import com.androidstrike.trackit.utils.getDate

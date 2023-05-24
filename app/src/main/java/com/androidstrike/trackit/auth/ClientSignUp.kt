@@ -7,8 +7,6 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
@@ -27,11 +25,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,6 +42,7 @@ class ClientSignUp : Fragment() {
     lateinit var userFirstName: String
     lateinit var userLastName: String
     lateinit var userEmail: String
+    lateinit var userPhoneNumber: String
     lateinit var userAddress: String
     lateinit var userAddressLongitude: String
     lateinit var userAddressLatitude: String
@@ -57,6 +51,7 @@ class ClientSignUp : Fragment() {
 
     var passwordOkay = false
     var emailOkay = false
+    var phoneNumberOkay = false
     var confirmPasswordOkay = false
 
     private var progressDialog: Dialog? = null
@@ -83,6 +78,7 @@ class ClientSignUp : Fragment() {
         binding.signUpPassword.setOnFocusChangeListener { v, hasFocus ->
             val passwordLayout = v as TextInputEditText
             val passwordText = passwordLayout.text.toString()
+            userPassword = passwordText
             if (!hasFocus) {
                 if (isPasswordValid(passwordText)) {
                     binding.textInputLayoutSignUpPassword.error = null // Clear any previous error
@@ -97,13 +93,14 @@ class ClientSignUp : Fragment() {
         binding.signUpConfirmPassword.setOnFocusChangeListener { v, hasFocus ->
             val confirmPasswordLayout = v as TextInputEditText
             val confirmPasswordText = confirmPasswordLayout.text.toString()
+
             if (!hasFocus) {
-                if (isPasswordValid(confirmPasswordText)) {
+                if (confirmPasswordText != userPassword) {
                     binding.textInputLayoutSignUpConfirmPassword.error = null // Clear any previous error
                     confirmPasswordOkay = true
                 } else {
                     binding.textInputLayoutSignUpConfirmPassword.error =
-                        "Password must contain at least one digit, uppercase, lowercase, special character and 8 characters" // Display an error message
+                        "Password does not match" // Display an error message
                 }
             }
             }
@@ -122,68 +119,6 @@ class ClientSignUp : Fragment() {
             }
             }
 
-
-//        binding.signUpPassword.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//
-//            }
-//
-//            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//                val input = p0.toString()
-//                if (isPasswordValid(input)) {
-//
-//                }
-//            }
-//
-//        })
-//        binding.signUpConfirmPassword.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//
-//            }
-//
-//            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//                val input = p0.toString()
-//                if (input == binding.signUpPassword.text.toString().trim()) {
-//                    binding.textInputLayoutSignUpConfirmPassword.error =
-//                        null // Clear any previous error
-//                    confirmPasswordOkay = true
-//                } else {
-//                    binding.textInputLayoutSignUpConfirmPassword.error =
-//                        "Does not match password" // Display an error message
-//                }
-//            }
-//
-//        })
-//        binding.signUpEmail.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//
-//            }
-//
-//            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//                val input = p0.toString()
-//                if (Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
-//                    binding.textInputLayoutSignUpEmail.error = null // Clear any previous error
-//                    emailOkay = true
-//                } else {
-//                    binding.textInputLayoutSignUpEmail.error =
-//                        "Enter valid email" // Display an error message
-//                }
-//            }
-//
-//        })
-
         binding.signUpAddressSelectMyLocation.setOnClickListener {
             getCurrentLocation()
         }
@@ -195,6 +130,7 @@ class ClientSignUp : Fragment() {
             userAddress = binding.signUpAddress.text.toString().trim()
             userPassword = binding.signUpPassword.text.toString().trim()
             userConfirmPassword = binding.signUpConfirmPassword.text.toString().trim()
+            userPhoneNumber = binding.signUpPhoneNumber.text.toString().trim()
             //userAddressLongitude, userAddressLatitude
 
 
@@ -204,7 +140,8 @@ class ClientSignUp : Fragment() {
                 userEmail,
                 userAddress,
                 userPassword,
-                userAddressLongitude, userAddressLatitude
+                userAddressLongitude, userAddressLatitude,
+                userPhoneNumber
             )
         }
 
@@ -218,7 +155,8 @@ class ClientSignUp : Fragment() {
         userAddress: String,
         userPassword: String,
         userAddressLongitude: String,
-        userAddressLatitude: String
+        userAddressLatitude: String,
+        userPhoneNumber: String
     ) {
         val mAuth = FirebaseAuth.getInstance()
         showProgress()
@@ -236,7 +174,8 @@ class ClientSignUp : Fragment() {
                         userAddressLongitude,
                         userAddressLatitude,
                         newUserId!!,
-                        dateJoined
+                        dateJoined,
+                        userPhoneNumber
                     )
 //                    userId = Common.mAuth.currentUser?.uid
                     hideProgress()
@@ -261,7 +200,8 @@ class ClientSignUp : Fragment() {
         userAddressLongitude: String,
         userAddressLatitude: String,
         newUserId: String,
-        dateJoined: String
+        dateJoined: String,
+        userPhoneNumber: String
     ) {
         val client = getClientUser(
             userFirstName,
@@ -271,7 +211,8 @@ class ClientSignUp : Fragment() {
             userAddressLongitude,
             userAddressLatitude,
             newUserId,
-            dateJoined
+            dateJoined,
+            userPhoneNumber
         )
         saveNewClient(client)
     }
@@ -295,7 +236,8 @@ class ClientSignUp : Fragment() {
         userAddressLongitude: String,
         userAddressLatitude: String,
         newUserId: String,
-        dateJoined: String
+        dateJoined: String,
+        userPhoneNumber: String
     ): Client {
         return Client(
             userId = newUserId,
@@ -304,7 +246,8 @@ class ClientSignUp : Fragment() {
             userEmail = userEmail,
             userAddressLongitude = userAddressLongitude,
             userAddressLatitude = userAddressLatitude,
-            dateJoined = dateJoined
+            dateJoined = dateJoined,
+            userPhoneNumber = userPhoneNumber
         )
     }
 

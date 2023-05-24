@@ -1,9 +1,8 @@
-package com.androidstrike.trackit.facility.requests
+package com.androidstrike.trackit.facility.facilitycustomerrequests
 
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.androidstrike.trackit.R
 import com.google.android.material.card.MaterialCardView

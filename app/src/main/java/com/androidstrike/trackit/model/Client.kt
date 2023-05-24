@@ -8,5 +8,6 @@ data class Client(
     val userAddressLongitude: String = "",
     val userAddressLatitude: String = "",
     val dateJoined: String = "",
-    val role: String = "client"
+    val role: String = "client",
+    val userPhoneNumber: String = ""
 )

@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,8 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import com.androidstrike.trackit.R
+import com.androidstrike.trackit.facility.facilityservice.Service
 import com.androidstrike.trackit.model.BookService
 import com.androidstrike.trackit.model.Facility
 import com.androidstrike.trackit.utils.Common
@@ -24,19 +25,18 @@ import com.androidstrike.trackit.utils.toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
 
-    private lateinit var selectedAppointmentService: String
+    private lateinit var selectedAppointmentServiceName: String
+    private lateinit var selectedAppointmentServiceID: String
     private lateinit var selectedAppointmentDate: String
     private lateinit var selectedAppointmentTime: String
     private lateinit var selectedAppointmentDescription: String
@@ -45,6 +45,10 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
     //private lateinit var facilityId: String
 
     private val calendar = Calendar.getInstance()
+
+    val facilityServices: MutableList<Service> = mutableListOf()
+    val facilityServicesNames: MutableList<String> = mutableListOf()
+
 
     private var progressDialog: Dialog? = null
 
@@ -60,9 +64,13 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val facility = arguments?.getParcelable<Facility>(ARG_FACILITY_DATA)
 
         if (facility != null) {
+
+            getFacilityServiceDetails(facility.facilityId)
+
             val bottomSheetBookButton = view.findViewById<Button>(R.id.book_btn)
             val bottomSheetFacilityName = view.findViewById<TextView>(R.id.facility_name)
             val bottomSheetFacilityAddress =
@@ -91,9 +99,13 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
             bottomSheetFacilityEmail.text = facility.facilityEmail
             bottomSheetFacilityPhone.text = facility.facilityPhoneNumber
 
-            val newRehabServicesArray = facility.services
+
+
+            Log.d("EQUA", "onViewCreated: $facilityServicesNames")
+            Log.d("EQUA", "onViewCreated: $facilityServices")
+
             val newRehabServicesArrayAdapter =
-                ArrayAdapter(requireContext(), R.layout.drop_down_item, newRehabServicesArray)
+                ArrayAdapter(requireContext(), R.layout.drop_down_item, facilityServicesNames)
             bottomSheetBookAppointmentServiceTextView.setAdapter(newRehabServicesArrayAdapter)
 
             bottomSheetBookAppointmentDate.setOnFocusChangeListener { view, hasFocus ->
@@ -114,7 +126,8 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
 
                 // book fragment
                 showProgress()
-                selectedAppointmentService =
+
+                selectedAppointmentServiceName =
                     bottomSheetBookAppointmentServiceTextView.text.toString().trim()
                 selectedAppointmentDate = bottomSheetBookAppointmentDate.text.toString().trim()
                 selectedAppointmentTime = bottomSheetBookAppointmentTime.text.toString().trim()
@@ -123,8 +136,15 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
                 dateBooked = System.currentTimeMillis().toString()
                 client = mAuth.currentUser!!.uid
 
+
+                for (service in facilityServices) {
+                    if (service.serviceDescription == selectedAppointmentServiceName)
+                        selectedAppointmentServiceID = service.serviceID
+                }
+
                 bookAppointment(
-                    selectedAppointmentService,
+                    selectedAppointmentServiceName,
+                    selectedAppointmentServiceID,
                     selectedAppointmentDate,
                     selectedAppointmentTime,
                     selectedAppointmentDescription,
@@ -199,7 +219,8 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun bookAppointment(
-        selectedAppointmentService: String,
+        selectedAppointmentServiceName: String,
+        selectedAppointmentServiceID: String,
         selectedAppointmentDate: String,
         selectedAppointmentTime: String,
         selectedAppointmentDescription: String,
@@ -210,52 +231,76 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val bookService = BookService(
-                    selectedAppointmentService = selectedAppointmentService,
+                    selectedAppointmentServiceName = selectedAppointmentServiceName,
+                    selectedAppointmentServiceID = selectedAppointmentServiceID,
                     selectedAppointmentDate = selectedAppointmentDate,
                     selectedAppointmentTime = selectedAppointmentTime,
                     selectedAppointmentDescription = selectedAppointmentDescription,
                     dateBooked = dateBooked,
                     clientId = client,
-                    facilityId = facilityId
+                    facilityId = facilityId,
+                    status = "pending"
                 )
 
                 //val appointmentQuery = Common.facilityCollectionRef.whereEqualTo("facilityId", facility.facilityId).get().await()
                 Common.appointmentsCollectionRef.document(dateBooked).set(bookService)
 
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     hideProgress()
                     dismiss()
                 }
                 //dismiss bottom sheet
 
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 requireContext().toast(e.message.toString())
             }
         }
     }
 
-    private fun showProgress() {
-        hideProgress()
-        progressDialog = requireActivity().showProgressDialog()
-    }
+    private fun getFacilityServiceDetails(facilityId: String) =
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d("EQUA", "getFacilityServiceDetails: $facilityId")
 
-    private fun hideProgress() {
-        progressDialog?.let { if (it.isShowing) it.cancel() }
-    }
+            Common.servicesCollectionRef
+                .get()
+                .addOnSuccessListener { querySnapshot: QuerySnapshot ->
 
+                    for (document in querySnapshot.documents) {
+                        val item = document.toObject(Service::class.java)
+                        if (item?.serviceOwnerID == facilityId) {
+                            facilityServices.add(item)
+                            Log.d("EQUA", "getFacilityServiceDetails: $facilityServices")
+                            for (service in facilityServices) {
+                                facilityServicesNames.add(service.serviceDescription)
+                            }
+                    }
+                    Log.d("EQUA", "getFacilityServiceDetails: $facilityServices")
 
-
-    companion object {
-        private const val ARG_FACILITY_DATA = "arg_facility_data"
-
-        fun newInstance(facility: Facility): MapFacilityDetailBottomSheet {
-            val fragment = MapFacilityDetailBottomSheet()
-            val args = Bundle().apply {
-                putParcelable(ARG_FACILITY_DATA, facility)
-
-            }
-            fragment.arguments = args
-            return fragment
+                }
         }
+}
+
+private fun showProgress() {
+    hideProgress()
+    progressDialog = requireActivity().showProgressDialog()
+}
+
+private fun hideProgress() {
+    progressDialog?.let { if (it.isShowing) it.cancel() }
+}
+
+
+companion object {
+    private const val ARG_FACILITY_DATA = "arg_facility_data"
+
+    fun newInstance(facility: Facility): MapFacilityDetailBottomSheet {
+        val fragment = MapFacilityDetailBottomSheet()
+        val args = Bundle().apply {
+            putParcelable(ARG_FACILITY_DATA, facility)
+
+        }
+        fragment.arguments = args
+        return fragment
     }
+}
 }

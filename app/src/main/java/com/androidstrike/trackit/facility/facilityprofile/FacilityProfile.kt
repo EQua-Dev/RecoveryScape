@@ -1,4 +1,4 @@
-package com.androidstrike.trackit.facility.profile
+package com.androidstrike.trackit.facility.facilityprofile
 
 import android.os.Bundle
 import android.util.Log
@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.androidstrike.trackit.R
-import com.androidstrike.trackit.databinding.FragmentFacilityBaseScreenBinding
 import com.androidstrike.trackit.databinding.FragmentFacilityProfileBinding
 import com.androidstrike.trackit.model.Facility
 import com.androidstrike.trackit.utils.Common

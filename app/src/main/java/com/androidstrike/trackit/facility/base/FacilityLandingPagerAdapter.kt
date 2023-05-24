@@ -15,8 +15,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.androidstrike.trackit.client.landing.FeedbackRating
 import com.androidstrike.trackit.facility.facilitynotification.FacilityNotification
 import com.androidstrike.trackit.facility.facilityservice.FacilityAddService
-import com.androidstrike.trackit.facility.profile.FacilityProfile
-import com.androidstrike.trackit.facility.requests.FacilityRequestsScreen
+import com.androidstrike.trackit.facility.facilityprofile.FacilityProfile
+import com.androidstrike.trackit.facility.facilitycustomerrequests.FacilityRequestsScreen
 
 /**
  * Created by Richard Uzor  on 28/01/2023

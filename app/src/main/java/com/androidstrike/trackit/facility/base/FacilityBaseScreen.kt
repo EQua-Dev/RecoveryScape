@@ -6,16 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.androidstrike.trackit.R
-import com.androidstrike.trackit.client.base.ClientLandingPagerAdapter
 import com.androidstrike.trackit.databinding.FragmentFacilityBaseScreenBinding
-import com.androidstrike.trackit.databinding.FragmentSignInBinding
-import com.androidstrike.trackit.facility.profile.FacilityProfile
-import com.androidstrike.trackit.facility.requests.FacilityRequestsScreen
-import com.androidstrike.trackit.utils.toast
 import com.google.android.material.tabs.TabLayout
 
 class FacilityBaseScreen : Fragment() {
@@ -66,10 +58,10 @@ class FacilityBaseScreen : Fragment() {
             facilityBaseTabTitle.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     facilityLandingViewPager.currentItem = tab.position
-                    facilityBaseTabTitle.setSelectedTabIndicatorColor(resources.getColor(R.color.custom_client_accent_color))
+                    facilityBaseTabTitle.setSelectedTabIndicatorColor(resources.getColor(R.color.custom_facility_accent_color))
                     facilityBaseTabTitle.setTabTextColors(
                         Color.BLACK,
-                        resources.getColor(R.color.custom_client_accent_color)
+                        resources.getColor(R.color.custom_facility_accent_color)
                     )
                 }
 
