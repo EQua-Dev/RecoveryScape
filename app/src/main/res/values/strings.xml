@@ -36,11 +36,11 @@
     <string name="landing_button_client_role">Client With Addiction Problem</string>
     <string name="sign_in_title">Login Screen</string>
     <string name="forgot_password_title">Forgot Password\n</string>
-    <string name="forgot_password_subtitle">Enter Registered Email to Reset Passsword</string>
+    <string name="forgot_password_subtitle">Enter Registered Email to Reset Password</string>
     <string name="account_forgot_password_log_in_prompt">Remembered Password</string>
     <string name="account_btn_reset_password">Send Reset Link</string>
     <string name="sign_up_facility_name">Enter Facility Name</string>
-    <string name="sign_up_facility_physical_address">Enter Facilty Physical Address</string>
+    <string name="sign_up_facility_physical_address">Enter Facility Physical Address</string>
     <string name="sign_up_facility_email">Enter Facility Email Address</string>
     <string name="sign_up_facility_phone_number">Enter Facility Phone Number</string>
     <string name="landing_button_facility_role">Rehabilitation Facility</string>
@@ -75,7 +75,7 @@
     <string name="facility_add_service_title">Add Service to Facility Profile</string>
     <string name="facility_add_service_category">Category</string>
     <string name="facility_add_service_description">Service Name</string>
-    <string name="facility_add_service_price">Service Price ($)</string>
+    <string name="facility_add_service_price">Service Price (€)</string>
     <string name="facility_add_service_discounted_price">Discounted Price (%) (leave empty if nil)</string>
     <string name="add_service_available_places">Service Available Places</string>
     <string name="facility_add_service_start_end_date">Start-End Date (if applicable)</string>

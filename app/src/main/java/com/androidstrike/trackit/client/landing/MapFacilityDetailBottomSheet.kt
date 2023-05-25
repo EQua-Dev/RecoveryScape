@@ -39,7 +39,7 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
     private lateinit var selectedAppointmentServiceID: String
     private lateinit var selectedAppointmentDate: String
     private lateinit var selectedAppointmentTime: String
-    private lateinit var selectedAppointmentDescription: String
+    //private lateinit var selectedAppointmentDescription: String
     private lateinit var dateBooked: String
     private lateinit var client: String
     //private lateinit var facilityId: String
@@ -91,8 +91,8 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
                 view.findViewById<TextInputEditText>(R.id.book_appointment_date)
             val bottomSheetBookAppointmentTime =
                 view.findViewById<TextInputEditText>(R.id.book_appointment_time)
-            val bottomSheetBookAppointmentDescription =
-                view.findViewById<TextInputEditText>(R.id.et_book_appointment_description)
+//            val bottomSheetBookAppointmentDescription =
+//                view.findViewById<TextInputEditText>(R.id.et_book_appointment_description)
 
             bottomSheetFacilityName.text = facility.facilityName
             bottomSheetFacilityAddress.text = facility.facilityAddress
@@ -131,8 +131,8 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
                     bottomSheetBookAppointmentServiceTextView.text.toString().trim()
                 selectedAppointmentDate = bottomSheetBookAppointmentDate.text.toString().trim()
                 selectedAppointmentTime = bottomSheetBookAppointmentTime.text.toString().trim()
-                selectedAppointmentDescription =
-                    bottomSheetBookAppointmentDescription.text.toString().trim()
+//                selectedAppointmentDescription =
+//                    bottomSheetBookAppointmentDescription.text.toString().trim()
                 dateBooked = System.currentTimeMillis().toString()
                 client = mAuth.currentUser!!.uid
 
@@ -147,7 +147,7 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
                     selectedAppointmentServiceID,
                     selectedAppointmentDate,
                     selectedAppointmentTime,
-                    selectedAppointmentDescription,
+                    //selectedAppointmentDescription,
                     dateBooked,
                     client,
                     facility.facilityId
@@ -223,7 +223,7 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
         selectedAppointmentServiceID: String,
         selectedAppointmentDate: String,
         selectedAppointmentTime: String,
-        selectedAppointmentDescription: String,
+        //selectedAppointmentDescription: String,
         dateBooked: String,
         client: String,
         facilityId: String
@@ -235,7 +235,7 @@ class MapFacilityDetailBottomSheet : BottomSheetDialogFragment() {
                     selectedAppointmentServiceID = selectedAppointmentServiceID,
                     selectedAppointmentDate = selectedAppointmentDate,
                     selectedAppointmentTime = selectedAppointmentTime,
-                    selectedAppointmentDescription = selectedAppointmentDescription,
+                    //selectedAppointmentDescription = selectedAppointmentDescription,
                     dateBooked = dateBooked,
                     clientId = client,
                     facilityId = facilityId,

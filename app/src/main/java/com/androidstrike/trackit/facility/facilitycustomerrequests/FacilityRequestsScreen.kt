@@ -313,7 +313,7 @@ class FacilityRequestsScreen : Fragment() {
                         requestingClient = item
                     }
                 }
-                requestDescription.text = "Dear Ma,\nMy name is ${requestingClient.userFirstName} ${requestingClient.userLastName}.\n\nI require your service ${model.selectedAppointmentServiceName}, starting from ${model.selectedAppointmentDate} if possible. My contact email is ${requestingClient.userEmail}.\n\nPlease, let me know if you can accomodate my request."
+                requestDescription.text = "Dear Sirs,\nMy name is ${requestingClient.userFirstName} ${requestingClient.userLastName}.\n\nI require your service ${model.selectedAppointmentServiceName}, starting from ${model.selectedAppointmentDate} if possible. My contact email is ${requestingClient.userEmail}.\n\nPlease, let me know if you can accomodate my request."
             }
     }
 

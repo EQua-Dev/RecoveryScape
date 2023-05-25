@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.androidstrike.trackit.R
 import com.androidstrike.trackit.databinding.FragmentFacilityAddServiceBinding
 import com.androidstrike.trackit.model.BookService
 import com.androidstrike.trackit.utils.Common
+import com.androidstrike.trackit.utils.enable
 import com.androidstrike.trackit.utils.showProgressDialog
 import com.androidstrike.trackit.utils.snackbar
 import com.androidstrike.trackit.utils.toast
@@ -61,6 +63,21 @@ class FacilityAddService : Fragment() {
             val newServiceCategoryArrayAdapter =
                 ArrayAdapter(requireContext(), R.layout.drop_down_item, newServiceCategoryArray)
             facilityAddServiceCategory.setAdapter(newServiceCategoryArrayAdapter)
+
+            facilityAddServiceCategory.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                // Do something with the selected value
+                // For example, display it in a TextView
+                serviceCategory = selectedItem
+                if (selectedItem == "Counselling Services" || selectedItem == "Spiritual/Religious Services"){
+                    facilityAddServicePrice.enable(false)
+                    facilityAddServiceDiscountedPrice.enable(false)
+                }else{
+                    facilityAddServicePrice.enable(true)
+                    facilityAddServiceDiscountedPrice.enable(true)
+                }
+            }
+
 
             val newServiceAvailablePlacesArray =
                 resources.getStringArray(R.array.service_available_places_option)

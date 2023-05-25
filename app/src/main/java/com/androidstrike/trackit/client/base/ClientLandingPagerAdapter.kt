@@ -17,16 +17,17 @@ import com.androidstrike.trackit.client.clientdigitalwallet.DigitalWallet
 import com.androidstrike.trackit.client.landing.FeedbackRating
 import com.androidstrike.trackit.client.clientinvoice.InvoicePayment
 import com.androidstrike.trackit.client.landing.MapsFragment
+import com.androidstrike.trackit.utils.toast
 
 /**
  * Created by Richard Uzor  on 28/01/2023
  */
-class ClientLandingPagerAdapter (var context: FragmentActivity?,
+class ClientLandingPagerAdapter (//var context: FragmentActivity?,
                                  fm: FragmentManager,
-                                 var totalTabs: Int
-) : FragmentPagerAdapter(fm) {
+                                 //var totalTabs: Int
+) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getCount(): Int {
-        return totalTabs
+        return 5
     }
 
     //when each tab is selected, define the fragment to be implemented

@@ -9,12 +9,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.androidstrike.trackit.R
 import com.androidstrike.trackit.databinding.FragmentClientBaseScreenBinding
 import com.androidstrike.trackit.utils.Common
 import com.androidstrike.trackit.utils.Common.auth
+import com.androidstrike.trackit.utils.enable
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,32 +48,57 @@ class ClientBaseScreen : Fragment() {
             binding.clientToolBar.title = Common.clientName
 
 
+            val tabTitles = listOf("Home Screen", "Digital Wallet", "View Notification", "View Invoice", "Place Feedback")
 
+            for (i in tabTitles.indices) {
+                val tab = clientBaseTabTitle.newTab()
+                val tabView = LayoutInflater.from(requireContext()).inflate(R.layout.client_custom_tab_item, null)
+
+                // Set the tab title
+                val tabTitle = tabView.findViewById<TextView>(R.id.client_custom_tab_title)
+                tabTitle.text = tabTitles[i]
+
+                // Disable clickability for a specific tab title
+                if (i == 3) {
+                    tabTitle.isClickable = false
+                    tab.view.enable(false)
+                    tab.view.isClickable = false
+                }
+
+                // Set the custom view for the tab
+                tab.customView = tabView
+
+                clientBaseTabTitle.addTab(tab)
+            }
             //set the title to be displayed on each tab
-            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("Home Screen"))
-            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("Digital Wallet"))
-            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("View Notification"))
-            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("View Invoice"))
-            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("Place Feedback"))
+//            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("Home Screen"))
+//            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("Digital Wallet"))
+//            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("View Notification"))
+//            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("View Invoice"))
+//            clientBaseTabTitle.addTab(clientBaseTabTitle.newTab().setText("Place Feedback"))
 
             clientBaseTabTitle.tabGravity = TabLayout.GRAVITY_FILL
 
 //            customToolbar = landingScreen.toolBar() as Toolbar
 //            customToolbar.title = "News"
 
-            val adapter = childFragmentManager.let {
+
+
+            val adapter = //childFragmentManager.let {
                 ClientLandingPagerAdapter(
-                    activity,
-                    it,
-                    clientBaseTabTitle.tabCount
+                    childFragmentManager
+                    //activity,
+                   // it,
+                    //clientBaseTabTitle.tabCount
                 )
-            }
-            clientLandingViewPager.adapter = adapter
-            clientLandingViewPager.addOnPageChangeListener(
-                TabLayout.TabLayoutOnPageChangeListener(
-                    clientBaseTabTitle
-                )
-            )
+                    // }
+           clientLandingViewPager.adapter = adapter
+//            clientBaseTabTitle.setupWithViewPager(clientLandingViewPager)
+            //clientLandingViewPager.addOnPageChangeListener(
+              //  TabLayout.TabLayoutOnPageChangeListener(
+                //    clientBaseTabTitle
+                //)
+            //)
 
             //define the functionality of the tab layout
             clientBaseTabTitle.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

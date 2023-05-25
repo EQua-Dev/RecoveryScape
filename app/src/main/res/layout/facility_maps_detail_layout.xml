@@ -167,34 +167,11 @@
                 android:labelFor="@id/book_appointment_date" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_book_appointment_description"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_input_layout_book_appointment_time"
-            android:layout_margin="@dimen/padding_midi"
-            android:hint="@string/ignore">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_book_appointment_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/ignore"
-                android:drawablePadding="@dimen/margin_midi"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:clickable="false"
-                android:labelFor="@id/et_book_appointment_description"
-                android:maxLines="5"
-                android:minLines="2" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/book_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_input_layout_book_appointment_description"
+            android:layout_below="@id/text_input_layout_book_appointment_time"
             android:layout_marginStart="@dimen/margin_midi"
             android:layout_marginTop="@dimen/margin_midi"
             android:layout_marginEnd="@dimen/margin_midi"
